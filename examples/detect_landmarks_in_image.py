@@ -17,15 +17,15 @@ fa = face_alignment.FaceAlignment(face_alignment.LandmarksType.TWO_D, device='cp
                                   face_detector=face_detector, face_detector_kwargs=face_detector_kwargs)
 
 try:
-    input_img = io.imread('../test/assets/01223.png')
+    input_img = io.imread('~/Downloads/00037.png')
 except FileNotFoundError:
     input_img = io.imread('test/assets/00016.png')
 
 start_time = time.time()
 preds = fa.get_landmarks(input_img)[-1]
-np.save('01223.npy', preds)
+#np.save('01223.npy', preds)
 nojaw_preds = preds[17:]
-np.save('01223nojaw_lmk.npy', nojaw_preds)
+np.save('00037nojaw_lmk.npy', nojaw_preds)
 time.sleep(2)
 end_time = time.time()
 elapsed_time = end_time - start_time
@@ -63,7 +63,7 @@ ax.axis('off')
 
 # 3D-Plot
 """
-ax = fig.add_subplot(1, 2, projection='2d')
+ax = fig.add_subplot(1, 2, 2, projection='3d')
 surf = ax.scatter(preds[:, 0] * 1.2,
                   preds[:, 1],
                   preds[:, 2],

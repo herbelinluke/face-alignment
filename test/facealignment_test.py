@@ -80,7 +80,7 @@ class Tester(unittest.TestCase):
 
     def test_predict_points(self):
         fa = face_alignment.FaceAlignment(face_alignment.LandmarksType.THREE_D, device='cpu')
-        preds = fa.get_landmarks('test/assets/aflw-test.jpg')
+        preds = fa.get_landmarks('./assets/aflw-test.jpg')
         self.assertEqual(len(preds), len(self.reference_data))
         for pred, reference in zip(preds, self.reference_data):
             self.assertTrue(np.allclose(pred, reference))
@@ -90,7 +90,7 @@ class Tester(unittest.TestCase):
 
         reference_data = self.reference_data + self.reference_data
         reference_data.append([])
-        image = get_image('test/assets/aflw-test.jpg')
+        image = get_image('./assets/aflw-test.jpg')
         batch = np.stack([image, image, np.zeros_like(image)])
         batch = torch.Tensor(batch.transpose(0, 3, 1, 2))
 
@@ -104,10 +104,10 @@ class Tester(unittest.TestCase):
         fa = face_alignment.FaceAlignment(face_alignment.LandmarksType.THREE_D, device='cpu')
 
         reference_data = {
-            'test/assets/grass.jpg': None,
-            'test/assets/aflw-test.jpg': self.reference_data}
+            './assets/grass.jpg': None,
+            './assets/aflw-test.jpg': self.reference_data}
 
-        preds = fa.get_landmarks_from_directory('test/assets/')
+        preds = fa.get_landmarks_from_directory('./assets/')
 
         for k, points in preds.items():
             if isinstance(points, list):
