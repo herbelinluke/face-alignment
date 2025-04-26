@@ -18,15 +18,15 @@ fa = face_alignment.FaceAlignment(face_alignment.LandmarksType.TWO_D, device='cp
 
 try:
 #    input_img = io.imread('~/Documents/face-alignment/test/assets/girlBsurg.png')
-    input_img = io.imread('~/Downloads/girlBsurg_initialize.png')
+    input_img = io.imread('~/Downloads/girlBsurg_exp_Expression.png')
 except FileNotFoundError:
     input_img = io.imread('test/assets/00016.png')
 
 start_time = time.time()
 preds = fa.get_landmarks(input_img)[-1]
-np.save('girl2Bsurg.npy', preds)
+np.save('cgirl2Bsurg.npy', preds)
 nojaw_preds = preds[17:]
-np.save('girl2BnoJaw.npy', nojaw_preds)
+np.save('cgirl2BnoJaw.npy', nojaw_preds)
 time.sleep(2)
 end_time = time.time()
 elapsed_time = end_time - start_time
